@@ -4,11 +4,7 @@ import request from 'supertest';
 import { app } from '../app';
 
 declare global {
-  namespace NodeJS {
-    interface Global {
-      signin(): Promise<string[]>;
-    }
-  }
+  var signin: () => Promise<string>;
 }
 
 let mongo: any;
@@ -16,13 +12,10 @@ beforeAll(async () => {
   process.env.JWT_KEY = 'asdfasdf';
   process.env.NODE_TLS_REJECT_UNAUTHORIZED = '0';
 
-  mongo = new MongoMemoryServer();
+  mongo = await MongoMemoryServer.create();
   const mongoUri = await mongo.getUri();
 
-  await mongoose.connect(mongoUri, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-  });
+  await mongoose.connect(mongoUri);
 });
 
 beforeEach(async () => {
@@ -50,7 +43,7 @@ global.signin = async () => {
     })
     .expect(201);
 
-  const cookie = response.get('Set-Cookie');
+  const token = response.body.token as string;
 
-  return cookie;
+  return token;
 };

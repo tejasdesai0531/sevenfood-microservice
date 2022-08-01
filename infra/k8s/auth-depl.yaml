@@ -17,7 +17,7 @@ spec:
           image: tejasdesai0531/sf-auth
           env:
             - name: MONGO_URI
-              value: 'mongodb://auth-mongo-srv:27017/auth'
+              value: 'mongodb+srv://seven-food:sevenfood.com@seven-food.717os.mongodb.net/auth?retryWrites=true&w=majority'
             - name: JWT_KEY
               valueFrom:
                 secretKeyRef:
