@@ -11,7 +11,7 @@ interface OutletAttrs {
     countryCode: string;
     cityCode: string;
     contact: string;
-    restaurantYype: [string];
+    restaurantType: [string];
     cuisines: [string];
     timing: {
         startsAt: Date;
@@ -31,7 +31,7 @@ interface OutletDoc extends mongoose.Document {
     countryCode: string;
     cityCode: string;
     contact: string;
-    restaurantYype: [string];
+    restaurantType: [string];
     cuisines: [string];
     timing: {
         startsAt: Date;
