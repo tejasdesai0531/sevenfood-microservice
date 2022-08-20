@@ -16,3 +16,19 @@ build:
         manual:
           - src: 'src/**/*.ts'
             dest: .
+    - image: tejasdesai0531/sf-admin
+      context: admin
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .
+    - image: tejasdesai0531/sf-restaurant
+      context: restaurant
+      docker:
+        dockerfile: Dockerfile
+      sync: 
+        manual:
+          - src: 'src/**/*.ts'
+            dest: .

@@ -6,7 +6,7 @@ import { Outlet } from '../models/outlet';
 const router = express.Router();
 
 router.post(
-    '/api/outlet',
+    '/api/restaurant/outlet',
     requireAuth,
     [
         body('name').not().isEmpty().withMessage('Name is required'),

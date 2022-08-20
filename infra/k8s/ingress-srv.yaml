@@ -17,3 +17,17 @@ spec:
                 name: auth-srv
                 port:
                   number: 3000
+          - path: /api/admin/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: admin-srv
+                port:
+                  number: 3000
+          - path: /api/restaurant/?(.*)
+            pathType: Prefix
+            backend:
+              service:
+                name: restaurant-srv
+                port:
+                  number: 3000
