@@ -16,6 +16,14 @@ spec:
         - name: restaurant
           image: tejasdesai0531/sf-restaurant
           env:
+            - name: NATS_CLIENT_ID
+              valueFrom:
+                fieldRef:
+                  fieldPath: metadata.name
+            - name: NATS_URL
+              value: 'http://nats-srv:4222'
+            - name: NATS_CLUSTER_ID
+              value: ticketing
             - name: MONGO_URI
               value: 'mongodb+srv://seven-food:sevenfood.com@seven-food.717os.mongodb.net/restaurant?retryWrites=true&w=majority'
             - name: JWT_KEY

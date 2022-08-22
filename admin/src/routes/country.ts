@@ -2,6 +2,8 @@ import express, { Request, Response} from 'express';
 import { body } from 'express-validator';
 import { NotFoundError, requireAuth, validateRequest } from '@sevenfood/common';
 import { Country } from '../models/country';
+import { CountryCreatedPublisher } from '../events/publishers/country-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -23,6 +25,13 @@ router.post(
         })
 
         await country.save();
+
+        new CountryCreatedPublisher(natsWrapper.client).publish({
+            id: country.id,
+            name: country.name,
+            code: country.code,
+            status: country.status
+        });
 
         res.status(201).send(country)
     }
