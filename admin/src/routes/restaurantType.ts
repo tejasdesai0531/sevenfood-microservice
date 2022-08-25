@@ -1,14 +1,13 @@
 import express, { Request, Response} from 'express';
 import { body } from 'express-validator';
 import { NotFoundError, requireAuth, validateRequest } from '@sevenfood/common';
-import { Country } from '../models/country';
-import { CountryCreatedPublisher } from '../events/publishers/country-created-publisher';
+import { RestaurantType } from '../models/restaurantType';
 import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
 router.post(
-    '/api/admin/country',
+    '/api/admin/restaurantType',
     requireAuth,
     [
         body('name').not().isEmpty().withMessage('Name is required'),
@@ -18,49 +17,42 @@ router.post(
     validateRequest,
     async (req: Request, res: Response) => {
 
-        const country = Country.build({
+        const restaurantType = RestaurantType.build({
             name: req.body.name,
             code: req.body.code,
             status: req.body.status
         })
 
-        await country.save();
+        await restaurantType.save();
 
-        new CountryCreatedPublisher(natsWrapper.client).publish({
-            id: country.id,
-            name: country.name,
-            code: country.code,
-            status: country.status
-        });
-
-        res.status(201).send(country)
+        res.status(201).send(restaurantType)
     }
 )
 
 router.get(
-    '/api/admin/country',
+    '/api/admin/restaurantType',
     requireAuth,
     async (req: Request, res: Response) => {
 
-        const countryList = await Country.find({})
+        const restaurantTypeList = await RestaurantType.find({})
 
-        res.status(200).send(countryList)
+        res.status(200).send(restaurantTypeList)
 
     }
 )
 
 router.get(
-    '/api/admin/country/:id',
+    '/api/admin/restaurantType/:id',
     requireAuth,
     async (req: Request, res: Response) => {
-        let country = await Country.findById(req.params.id)
+        let restaurantType = await RestaurantType.findById(req.params.id)
 
-        if(!country) {
+        if(!restaurantType) {
             throw new NotFoundError()
         }
 
-        res.send(country)
+        res.send(restaurantType)
     }
 )
 
-export { router as countryRouter };
+export { router as restaurantTypeRouter };

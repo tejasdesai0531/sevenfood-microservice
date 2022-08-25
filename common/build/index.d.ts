@@ -15,3 +15,7 @@ export * from './events/country-created-event';
 export * from './events/country-updated-event';
 export * from './events/city-created-event';
 export * from './events/city-updated-event';
+export * from './events/cuisine-created-event';
+export * from './events/cuisine-updated-event';
+export * from './events/restaurant-type-created-event';
+export * from './events/restaurant-type-updated-event';

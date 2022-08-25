@@ -1,22 +1,22 @@
 import mongoose from "mongoose";
 
-interface CountryAttrs {
+interface CuisineAttrs {
     name: string;
     code: string;
     status: boolean;
 }
 
-export interface CountryDoc extends mongoose.Document {
+export interface CuisineDoc extends mongoose.Document {
     name: string;
     code: string;
     status: boolean;
 }
 
-interface CountryModel extends mongoose.Model<CountryAttrs> {
-    build(attrs: CountryAttrs): CountryDoc;
+interface CuisineModel extends mongoose.Model<CuisineAttrs> {
+    build(attrs: CuisineAttrs): CuisineDoc;
 }
 
-const countrySchema = new mongoose.Schema(
+const cuisineSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -43,10 +43,10 @@ const countrySchema = new mongoose.Schema(
 )
 
 
-countrySchema.statics.build = (attrs: CountryAttrs) => {
-    return new Country(attrs)
+cuisineSchema.statics.build = (attrs: CuisineAttrs) => {
+    return new Cuisine(attrs)
 }
 
-const Country = mongoose.model<CountryDoc, CountryModel>('Country', countrySchema);
+const Cuisine = mongoose.model<CuisineDoc, CuisineModel>('Cuisine', cuisineSchema);
 
-export { Country };
+export { Cuisine };

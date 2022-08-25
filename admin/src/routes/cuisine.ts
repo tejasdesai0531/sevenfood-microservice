@@ -1,14 +1,13 @@
 import express, { Request, Response} from 'express';
 import { body } from 'express-validator';
 import { NotFoundError, requireAuth, validateRequest } from '@sevenfood/common';
-import { Country } from '../models/country';
-import { CountryCreatedPublisher } from '../events/publishers/country-created-publisher';
+import { Cuisine } from '../models/cuisine';
 import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
 router.post(
-    '/api/admin/country',
+    '/api/admin/cuisine',
     requireAuth,
     [
         body('name').not().isEmpty().withMessage('Name is required'),
@@ -18,49 +17,42 @@ router.post(
     validateRequest,
     async (req: Request, res: Response) => {
 
-        const country = Country.build({
+        const cuisine = Cuisine.build({
             name: req.body.name,
             code: req.body.code,
             status: req.body.status
         })
 
-        await country.save();
+        await cuisine.save();
 
-        new CountryCreatedPublisher(natsWrapper.client).publish({
-            id: country.id,
-            name: country.name,
-            code: country.code,
-            status: country.status
-        });
-
-        res.status(201).send(country)
+        res.status(201).send(cuisine)
     }
 )
 
 router.get(
-    '/api/admin/country',
+    '/api/admin/cuisine',
     requireAuth,
     async (req: Request, res: Response) => {
 
-        const countryList = await Country.find({})
+        const cuisineList = await Cuisine.find({})
 
-        res.status(200).send(countryList)
+        res.status(200).send(cuisineList)
 
     }
 )
 
 router.get(
-    '/api/admin/country/:id',
+    '/api/admin/cuisine/:id',
     requireAuth,
     async (req: Request, res: Response) => {
-        let country = await Country.findById(req.params.id)
+        let cuisine = await Cuisine.findById(req.params.id)
 
-        if(!country) {
+        if(!cuisine) {
             throw new NotFoundError()
         }
 
-        res.send(country)
+        res.send(cuisine)
     }
 )
 
-export { router as countryRouter };
+export { router as cuisineRouter };

@@ -32,3 +32,7 @@ __exportStar(require("./events/country-created-event"), exports);
 __exportStar(require("./events/country-updated-event"), exports);
 __exportStar(require("./events/city-created-event"), exports);
 __exportStar(require("./events/city-updated-event"), exports);
+__exportStar(require("./events/cuisine-created-event"), exports);
+__exportStar(require("./events/cuisine-updated-event"), exports);
+__exportStar(require("./events/restaurant-type-created-event"), exports);
+__exportStar(require("./events/restaurant-type-updated-event"), exports);

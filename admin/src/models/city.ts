@@ -27,7 +27,8 @@ const citySchema = new mongoose.Schema(
         },
         code: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         country: {
             type: mongoose.Schema.Types.ObjectId,

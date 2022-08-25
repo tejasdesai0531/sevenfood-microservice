@@ -12,8 +12,8 @@ router.post(
     requireAuth,
     [
         body('name').not().isEmpty().withMessage('Name is required'),
-        body('code').not().isEmpty().withMessage('Address is required'),
-        body('countryId').not().isEmpty().custom((input: string) => mongoose.Types.ObjectId.isValid(input)).withMessage('TicketId must be provided'),
+        body('code').not().isEmpty().withMessage('Code is required'),
+        body('countryId').not().isEmpty().custom((input: string) => mongoose.Types.ObjectId.isValid(input)).withMessage('Country Id must be provided'),
         body('status').not().isEmpty().isBoolean().withMessage('Status is required')
     ],
     validateRequest,

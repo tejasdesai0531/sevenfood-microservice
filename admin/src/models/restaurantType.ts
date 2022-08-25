@@ -1,22 +1,22 @@
 import mongoose from "mongoose";
 
-interface CountryAttrs {
+interface RestaurantTypeAttrs {
     name: string;
     code: string;
     status: boolean;
 }
 
-export interface CountryDoc extends mongoose.Document {
+export interface RestaurantTypeDoc extends mongoose.Document {
     name: string;
     code: string;
     status: boolean;
 }
 
-interface CountryModel extends mongoose.Model<CountryAttrs> {
-    build(attrs: CountryAttrs): CountryDoc;
+interface RestaurantTypeModel extends mongoose.Model<RestaurantTypeAttrs> {
+    build(attrs: RestaurantTypeAttrs): RestaurantTypeDoc;
 }
 
-const countrySchema = new mongoose.Schema(
+const restaurantTypeSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -43,10 +43,10 @@ const countrySchema = new mongoose.Schema(
 )
 
 
-countrySchema.statics.build = (attrs: CountryAttrs) => {
-    return new Country(attrs)
+restaurantTypeSchema.statics.build = (attrs: RestaurantTypeAttrs) => {
+    return new RestaurantType(attrs)
 }
 
-const Country = mongoose.model<CountryDoc, CountryModel>('Country', countrySchema);
+const RestaurantType = mongoose.model<RestaurantTypeDoc, RestaurantTypeModel>('RestaurantType', restaurantTypeSchema);
 
-export { Country };
+export { RestaurantType };
