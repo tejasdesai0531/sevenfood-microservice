@@ -12,5 +12,7 @@ var Subjects;
     Subjects["RestaurantTypeCreated"] = "restaurantType:created";
     Subjects["RestaurantTypeUpdated"] = "restaurantType:updated";
     Subjects["ItemCreated"] = "item:created";
-    Subjects["ItemUpated"] = "item:updated";
+    Subjects["ItemUpdated"] = "item:updated";
+    Subjects["ItemVisibilityUpdated"] = "item:visibilityUpdated";
+    Subjects["ItemDeleted"] = "item:itemDeleted";
 })(Subjects = exports.Subjects || (exports.Subjects = {}));

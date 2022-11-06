@@ -23,5 +23,8 @@ export * from './events/cuisine-updated-event';
 export * from './events/restaurant-type-created-event';
 export * from './events/restaurant-type-updated-event';
 export * from './events/item-created-event';
+export * from './events/item-updated-event';
+export * from './events/item-visibility-updated-event';
+export * from './events/item-deleted-event';
 
 export * from './events/types/item-status';

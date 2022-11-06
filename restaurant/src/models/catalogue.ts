@@ -13,8 +13,11 @@ interface CatalogueAttrs {
                     name: string;
                     items?: [
                         {
+                            id?: string;
                             name: string;
                             price: number;
+                            status?: ItemStatus;
+                            visibility?: boolean;
                         }
                     ]
                 }
@@ -35,9 +38,11 @@ export interface CatalogueDoc extends mongoose.Document {
                     name: string;
                     items?: [
                         {
+                            id?: string;
                             name: string;
                             price: number;
-                            status: ItemStatus;
+                            status?: ItemStatus;
+                            visibility?: boolean;
                         }
                     ]
                 }

@@ -8,5 +8,7 @@ export declare enum Subjects {
     RestaurantTypeCreated = "restaurantType:created",
     RestaurantTypeUpdated = "restaurantType:updated",
     ItemCreated = "item:created",
-    ItemUpated = "item:updated"
+    ItemUpdated = "item:updated",
+    ItemVisibilityUpdated = "item:visibilityUpdated",
+    ItemDeleted = "item:itemDeleted"
 }
