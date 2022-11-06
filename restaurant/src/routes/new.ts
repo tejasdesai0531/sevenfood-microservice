@@ -2,6 +2,7 @@ import express, { Request, Response} from 'express';
 import { body } from 'express-validator';
 import { requireAuth, validateRequest } from '@sevenfood/common';
 import { Outlet } from '../models/outlet';
+import { Catalogue } from '../models/catalogue';
 
 const router = express.Router();
 
@@ -34,6 +35,12 @@ router.post(
         })
 
         await outlet.save();
+
+        const catalogue = Catalogue.build({
+            outletId: outlet.id
+        })
+
+        await catalogue.save()
 
         res.status(201).send(outlet)
     }

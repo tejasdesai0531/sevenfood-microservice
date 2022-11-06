@@ -6,5 +6,7 @@ export declare enum Subjects {
     CuisineCreated = "cuisine:created",
     CuisineUpdated = "cuisine:updated",
     RestaurantTypeCreated = "restaurantType:created",
-    RestaurantTypeUpdated = "restaurantType:updated"
+    RestaurantTypeUpdated = "restaurantType:updated",
+    ItemCreated = "item:created",
+    ItemUpated = "item:updated"
 }
