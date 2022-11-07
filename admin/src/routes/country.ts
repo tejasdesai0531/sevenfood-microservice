@@ -3,6 +3,7 @@ import { body } from 'express-validator';
 import { NotFoundError, requireAuth, validateRequest } from '@sevenfood/common';
 import { Country } from '../models/country';
 import { CountryCreatedPublisher } from '../events/publishers/country-created-publisher';
+import { CountryUpdatedPublisher } from '../events/publishers/country-updated-publisher';
 import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
@@ -27,6 +28,43 @@ router.post(
         await country.save();
 
         new CountryCreatedPublisher(natsWrapper.client).publish({
+            id: country.id,
+            name: country.name,
+            code: country.code,
+            status: country.status
+        });
+
+        res.status(201).send(country)
+    }
+)
+
+router.patch(
+    '/api/admin/country',
+    requireAuth,
+    [
+        body('countryId').not().isEmpty().withMessage('Country Id is required'),
+        body('name').not().isEmpty().withMessage('Name is required'),
+        body('code').not().isEmpty().withMessage('Code is required'),
+        body('status').not().isEmpty().isBoolean().withMessage('Status is required')
+    ],
+    validateRequest,
+    async (req: Request, res: Response) => {
+
+        const { countryId, name, code, status} = req.body
+
+        const country = await Country.findById(countryId)
+
+        if(!country) {
+            throw new NotFoundError()
+        }
+
+        country.name = name
+        country.code = code
+        country.status = status
+
+        await country.save();
+
+        new CountryUpdatedPublisher(natsWrapper.client).publish({
             id: country.id,
             name: country.name,
             code: country.code,
