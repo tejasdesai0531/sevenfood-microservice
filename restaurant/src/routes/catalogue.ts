@@ -206,7 +206,7 @@ router.patch(
             categoryId: category.id!,
             subcategoryId: subCategory.id!,
             outletId: outlet.id,
-            visibility: item.visibility
+            visibility: item.visibility!
         })
 
         res.status(201).send(catalogue)

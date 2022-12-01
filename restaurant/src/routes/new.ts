@@ -3,6 +3,8 @@ import { body } from 'express-validator';
 import { requireAuth, validateRequest } from '@sevenfood/common';
 import { Outlet } from '../models/outlet';
 import { Catalogue } from '../models/catalogue';
+import { OutletCreatedPublisher } from '../events/publishers/outlet-created-publisher';
+import { natsWrapper } from '../nats-wrapper';
 
 const router = express.Router();
 
@@ -17,8 +19,6 @@ router.post(
     ],
     validateRequest,
     async (req: Request, res: Response) => {
-
-        console.log(req.body)
 
         const outlet = Outlet.build({
             userId: req.currentUser!.id,
@@ -41,6 +41,21 @@ router.post(
         })
 
         await catalogue.save()
+
+        new OutletCreatedPublisher(natsWrapper.client).publish({
+            id: outlet.id,
+            userId: outlet.userId,
+            name: outlet.name,
+            address: outlet.address,
+            location: outlet.location,
+            countryCode: outlet.countryCode,
+            cityCode: outlet.cityCode,
+            contact: outlet.contact,
+            restaurantType: outlet.restaurantType,
+            cuisines: outlet.cuisines,
+            timing: outlet.timing,
+            workingDays: outlet.workingDays
+        })
 
         res.status(201).send(outlet)
     }

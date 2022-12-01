@@ -36,6 +36,7 @@ __exportStar(require("./events/cuisine-created-event"), exports);
 __exportStar(require("./events/cuisine-updated-event"), exports);
 __exportStar(require("./events/restaurant-type-created-event"), exports);
 __exportStar(require("./events/restaurant-type-updated-event"), exports);
+__exportStar(require("./events/outlet-created-event"), exports);
 __exportStar(require("./events/item-created-event"), exports);
 __exportStar(require("./events/item-updated-event"), exports);
 __exportStar(require("./events/item-visibility-updated-event"), exports);

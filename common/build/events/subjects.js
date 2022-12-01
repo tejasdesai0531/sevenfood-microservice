@@ -11,6 +11,7 @@ var Subjects;
     Subjects["CuisineUpdated"] = "cuisine:updated";
     Subjects["RestaurantTypeCreated"] = "restaurantType:created";
     Subjects["RestaurantTypeUpdated"] = "restaurantType:updated";
+    Subjects["OutletCreated"] = "outlet:created";
     Subjects["ItemCreated"] = "item:created";
     Subjects["ItemUpdated"] = "item:updated";
     Subjects["ItemVisibilityUpdated"] = "item:visibilityUpdated";

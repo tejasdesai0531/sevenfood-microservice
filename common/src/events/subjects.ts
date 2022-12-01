@@ -11,6 +11,8 @@ export enum Subjects {
   RestaurantTypeCreated = 'restaurantType:created',
   RestaurantTypeUpdated = 'restaurantType:updated',
 
+  OutletCreated = 'outlet:created',
+
   ItemCreated = 'item:created',
   ItemUpdated = 'item:updated',
   ItemVisibilityUpdated = 'item:visibilityUpdated',
